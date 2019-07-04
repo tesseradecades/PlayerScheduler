@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from schedulemaker import Player, generate_schedule
+from schedulemaker import Player, generate_schedule, ncr
 
 app = Flask(__name__)
 
@@ -18,7 +18,8 @@ def schedule():
         Player("Steven"),
         Player("Heather")
         }
-    schedule = generate_schedule(players,21)
+    num_on = 5
+    schedule = generate_schedule(players,num_on=5,num_weeks=ncr(len(players),num_on))
     return render_template('schedule.html',schedule=schedule)
 
 if __name__ == '__main__':
